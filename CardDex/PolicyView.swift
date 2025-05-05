@@ -1,25 +1,27 @@
 //
-//  ContentView.swift
+//  PolicyView.swift
 //  CardDex
 //
-//  Created by Jeffery Wang on 22/4/2025.
+//  Created by Campbell Finlay on 5/5/2025.
 //
 
 import SwiftUI
 import UIKit
 import AVFoundation
 
-struct ContentView: View {
+struct PolicyView: View {
     private let player = AVPlayer(url: Bundle.main.url(forResource: "mainbackground", withExtension: "mp4")!)
     
     var body: some View {
         ZStack{
-            //Rectangle().fill(.blue).ignoresSafeArea()
             VideoBackgroundPlayer(player: player).ignoresSafeArea()
             VStack{
-                //Image() Logo
-                NavigationLink(destination: PolicyView()) {
-                    Text("Enter")
+                Spacer()
+                Text("Policy goes here")
+                    .foregroundStyle(.white)
+                Spacer()
+                NavigationLink(destination: GamesMenuView()) {
+                    Text("Agree")
                         .font(.headline)
                         .foregroundStyle(.purple)
                         .frame(width: 200, height: 50)
@@ -30,6 +32,7 @@ struct ContentView: View {
                                 .shadow(color: .gray.opacity(1), radius: 5, x: 0, y: 2)
                         )
                 }
+                Spacer()
             }
             .padding()
         }
@@ -37,5 +40,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    PolicyView()
 }
