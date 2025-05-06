@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PokemonHomeView: View {
-    @StateObject var pokemonAPI = PokemonAPI()
+    //@StateObject var pokemonAPI = PokemonAPI()
     
     var body: some View {
         NavigationStack{
