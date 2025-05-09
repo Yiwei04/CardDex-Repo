@@ -1,6 +1,6 @@
 # CardDex
 
-## Track the Value of Your Physical Card Collection
+**Track the Value of Your Physical Card Collection**
 
 **CardDex** is a powerful card value tracker designed for collectors of various trading card games with a special focus on **Pokémon TCG**
 
