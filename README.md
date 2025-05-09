@@ -1,4 +1,4 @@
-# 🃏 CardDex
+# CardDex
 
 ## Track the Value of Your Physical Card Collection
 
