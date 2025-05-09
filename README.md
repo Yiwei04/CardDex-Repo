@@ -4,8 +4,6 @@
 
 **CardDex** is a powerful card value tracker designed for collectors of various trading card games with a special focus on **Pokémon TCG**
 
----
-
 ## Key Features:
 
 ### 📂 Add Physical Cards to Your Portfolio
