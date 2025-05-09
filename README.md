@@ -6,7 +6,7 @@
 
 ---
 
-## 🔥 Key Features
+## Key Features:
 
 ### 📂 Add Physical Cards to Your Portfolio
 Easily search and add cards from supported games like Pokémon. Whether it's a base set Charizard or a modern VMAX, CardDex helps you log your collection quickly and accurately.
@@ -18,7 +18,7 @@ Track the market value of each card over time, updated regularly to reflect pric
 See the total value of your collection, monitor changes over days, weeks, or months, and view trends for individual cards or your entire portfolio.
 
 ### 📌 Future Support for More Games
-While Pokémon TCG is the core focus today, CardDex is expanding to include other popular games like:
+Pokémon TCG is the core focus, however, CardDex is expanding to include other popular games such as:
 
 - Magic: The Gathering  
 - Yu-Gi-Oh!  
