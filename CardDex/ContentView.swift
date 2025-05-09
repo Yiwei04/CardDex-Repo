@@ -14,12 +14,11 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            //Rectangle().fill(.blue).ignoresSafeArea()
             VideoBackgroundPlayer(player: player).ignoresSafeArea()
             VStack{
                 //Image() Logo
                 NavigationLink(destination: PolicyView()) {
-                    Text("Enter")
+                    Text("Begin")
                         .font(.headline)
                         .foregroundStyle(.purple)
                         .frame(width: 200, height: 50)

@@ -12,14 +12,22 @@ import AVFoundation
 struct PolicyView: View {
     private let player = AVPlayer(url: Bundle.main.url(forResource: "mainbackground", withExtension: "mp4")!)
     
-    var body: some View { //hi
+    var body: some View {
         ZStack{
             VideoBackgroundPlayer(player: player).ignoresSafeArea()
             VStack{
                 Spacer()
+                //Logo
+                Spacer()
                 Text("Policy goes here")
-                    .foregroundStyle(.white)
-                Spacer()ß
+                    .foregroundStyle(.purple)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.white)
+                            .shadow(color: .gray.opacity(1), radius: 5, x: 0, y: 2)
+                            .frame(width: 280, height: 300)
+                        )
+                Spacer()
                 NavigationLink(destination: GamesMenuView()) {
                     Text("Agree")
                         .font(.headline)
