@@ -103,12 +103,13 @@ struct PokemonHomeView: View {
                 Image("Pikachu")
                     .resizable()
                     .cornerRadius(12)
-                    .frame(width: 225, height: 325)
+                    .frame(width: 275, height: 375)
             }
             .padding(.horizontal)
         }
         .padding()
         .background(Color(red: 79/255, green: 23/255, blue: 108/255).edgesIgnoringSafeArea(.all))
+        .navigationBarBackButtonHidden(true)
     }
 }
 

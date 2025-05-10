@@ -22,7 +22,7 @@ struct CardsView: View {
 
     var body: some View {
         ScrollView {
-            VStack{
+            VStack {
                 // Back button
                 HStack {
                     Button(action: {
@@ -36,8 +36,8 @@ struct CardsView: View {
                 }
                 .padding(.horizontal)
 
-                // Yellow buttons
-                HStack{
+                // Yellow nav buttons
+                HStack {
                     NavigationLink(destination: CardsView()) {
                         Text("All Cards")
                             .font(.system(size: 14, weight: .semibold))
@@ -84,7 +84,7 @@ struct CardsView: View {
                 .cornerRadius(15)
                 .padding(.horizontal)
 
-                // Popular Now
+                // Title
                 Text("Popular Now")
                     .font(.title3)
                     .foregroundColor(.white)
@@ -93,15 +93,17 @@ struct CardsView: View {
                 // Grid of Cards
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                     ForEach(filteredCards) { card in
-                        VStack {
-                            Image(card.imageName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 160)
-                                .cornerRadius(10)
-                            Text(card.name)
-                                .font(.subheadline)
-                                .foregroundColor(.white)
+                        NavigationLink(destination: CardDetailsView(card: card)) {
+                            VStack {
+                                Image(card.imageName)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 160)
+                                    .cornerRadius(10)
+                                Text(card.name)
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                            }
                         }
                     }
                 }
@@ -113,6 +115,7 @@ struct CardsView: View {
         }
         .padding()
         .background(Color(red: 79/255, green: 23/255, blue: 108/255).edgesIgnoringSafeArea(.all))
+        .navigationBarBackButtonHidden(true)
     }
 
     private func loadCards() {
@@ -132,5 +135,8 @@ struct CardsView: View {
 }
 
 #Preview {
-    CardsView()
+    NavigationStack {
+        CardsView()
+    }
 }
+
