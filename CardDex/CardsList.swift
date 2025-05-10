@@ -7,33 +7,23 @@
 
 import Foundation
 
-class CardList {
-    var cardList: [Card] = []
-    
+class CardList: ObservableObject {
+    @Published var cardList: [Card] = []
+
     func getCardList() -> [Card] {
         return cardList
     }
-    
+
     func getCard(name: String) -> Card {
-        for card in cardList{
-            if(card.name == name){
-                return card
-            }
-        }
-        return Card(name: "None", marketprice: 0.0)
+        cardList.first { $0.name == name } ?? Card(name: "None", marketprice: 0.0, imageName: "")
     }
-    
-    func addCard(card: Card){
+
+    func addCard(card: Card) {
         cardList.append(card)
     }
-    
-    func removeCard(removecard: Card){
-        var count: Int = 0
-        while(count < cardList.count){
-            if(cardList[count].name == removecard.name){
-                cardList.remove(at: count)
-                continue
-            }
-        }
+
+    func removeCard(removecard: Card) {
+        cardList.removeAll { $0.name == removecard.name }
     }
 }
+

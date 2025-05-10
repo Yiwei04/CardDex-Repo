@@ -7,12 +7,15 @@
 
 import Foundation
 
-class Card {
+class Card: Identifiable, ObservableObject {
+    let id = UUID()  // Required for SwiftUI lists
     var name: String
     var marketprice: Double
-    
-    init(name: String, marketprice: Double){
+    var imageName: String
+
+    init(name: String, marketprice: Double, imageName: String) {
         self.name = name
         self.marketprice = marketprice
+        self.imageName = imageName
     }
 }
