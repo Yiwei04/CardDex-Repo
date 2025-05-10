@@ -8,14 +8,107 @@
 import SwiftUI
 
 struct PokemonHomeView: View {
-    //@StateObject var pokemonAPI = PokemonAPI()
+    @Environment(\.dismiss) var dismiss  // lets us go back
     
     var body: some View {
-        NavigationStack{
-            ScrollView{
-                //Feel free to continue progress, still trying to get the API to work
+        ScrollView{
+            Image("Pokemon_Logo")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 200, height: 100)
+            HStack {
+                Button(action: {
+                    dismiss()
+                }) {
+                    Image(systemName: "arrow.left")
+                        .foregroundColor(.yellow)
+                        .font(.title2)
+                }
+                Spacer()
             }
+            .padding(.horizontal)
+
+            // yellow buttons
+            HStack(spacing: 10) {
+                NavigationLink(destination: CardsView()) {
+                    Text("All Cards")
+                        .font(.system(size: 14, weight: .semibold))
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 14)
+                        .background(Color.yellow)
+                        .foregroundColor(.blue)
+                        .cornerRadius(20)
+                }
+                
+                NavigationLink(destination: PokemonFolioView()) {
+                    Text("News")
+                        .font(.system(size: 14, weight: .semibold))
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 14)
+                        .background(Color.yellow)
+                        .foregroundColor(.blue)
+                        .cornerRadius(20)
+                }
+                
+                NavigationLink(destination: PokemonFolioView()) {
+                    Text("My Portfolio")
+                        .font(.system(size: 14, weight: .semibold))
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 14)
+                        .background(Color.yellow)
+                        .foregroundColor(.blue)
+                        .cornerRadius(20)
+                }
+            }
+            // Total Worth
+                VStack(spacing: 8) {
+                    Text("Total Worth")
+                        .font(.headline)
+                        .foregroundColor(.white.opacity(0.8))
+                                        
+                        Text("$2,561.39")
+                            .font(.system(size: 40, weight: .bold))
+                            .foregroundColor(.white)
+                                        
+                        HStack(spacing: 10) {
+                            Text("+$45.32")
+                                .foregroundColor(.green)
+                                .fontWeight(.bold)
+                        Label("14.63%", systemImage: "arrow.up")
+                            .font(.subheadline)
+                            .foregroundColor(.green)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.green.opacity(0.2))
+                            .cornerRadius(8)
+                        Button("24H") { }
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 4)
+                            .background(Color.gray.opacity(0.3))
+                            .cornerRadius(8)
+                        }
+                    }
+            .padding()
+            
+            // Card of the Day
+            VStack{
+                Text("Card of the Day")
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .bold()
+                Text("Card Value + 3.5%")
+                    .font(.subheadline)
+                    .foregroundColor(.green)
+                Image("Pikachu")
+                    .resizable()
+                    .cornerRadius(12)
+                    .frame(width: 275, height: 375)
+            }
+            .padding(.horizontal)
         }
+        .padding()
+        .background(Color(red: 79/255, green: 23/255, blue: 108/255).edgesIgnoringSafeArea(.all))
     }
 }
 
