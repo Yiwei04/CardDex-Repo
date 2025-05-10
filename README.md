@@ -23,3 +23,4 @@ Pokémon TCG is the core focus, however, CardDex is expected to include other po
 - One Piece TCG  
 - *And more...*
 
+Git Repository: https://github.com/Yiwei04/CardDex-Repo
