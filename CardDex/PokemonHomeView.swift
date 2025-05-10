@@ -103,7 +103,7 @@ struct PokemonHomeView: View {
                 Image("Pikachu")
                     .resizable()
                     .cornerRadius(12)
-                    .frame(width: 275, height: 375)
+                    .frame(width: 225, height: 325)
             }
             .padding(.horizontal)
         }
