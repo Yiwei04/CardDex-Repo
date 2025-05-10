@@ -38,15 +38,14 @@ struct CardsView: View {
 
                 // Yellow nav buttons
                 HStack {
-                    NavigationLink(destination: CardsView()) {
-                        Text("All Cards")
-                            .font(.system(size: 14, weight: .semibold))
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 14)
-                            .background(Color.yellow)
-                            .foregroundColor(.blue)
-                            .cornerRadius(20)
-                    }
+                    // Replaced NavigationLink with non-clickable label
+                    Text("All Cards")
+                        .font(.system(size: 14, weight: .semibold))
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 14)
+                        .background(Color.yellow.opacity(0.6))
+                        .foregroundColor(.gray)
+                        .cornerRadius(20)
 
                     NavigationLink(destination: PokemonNewsView()) {
                         Text("News")
@@ -139,4 +138,3 @@ struct CardsView: View {
         CardsView()
     }
 }
-
