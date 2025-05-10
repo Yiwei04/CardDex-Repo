@@ -40,7 +40,7 @@ struct PokemonHomeView: View {
                         .cornerRadius(20)
                 }
                 
-                NavigationLink(destination: PokemonFolioView()) {
+                NavigationLink(destination: PokemonNewsView()) {
                     Text("News")
                         .font(.system(size: 14, weight: .semibold))
                         .padding(.vertical, 8)
