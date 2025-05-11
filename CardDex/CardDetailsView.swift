@@ -61,7 +61,7 @@ struct CardDetailsView: View {
 
                     // Total worth section
                     VStack(spacing: 6) {
-                        Text("Total Worth")
+                        Text("Market Price")
                             .foregroundColor(.white)
                             .font(.headline)
 
