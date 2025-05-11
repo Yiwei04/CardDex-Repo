@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct CardDetailsView: View {
+    let card: Card
+
     var body: some View {
+        CardDetailsView
         NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
@@ -82,10 +85,10 @@ struct CardDetailsView: View {
 
                     // Card attributes
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("🪪 **Set:** EX Deoxys")
-                        Text("🧬 **Type:** Dragon 🐉")
-                        Text("⚡️ **HP:** 160")
-                        Text("📄 **Card Number:** 102/107")
+                        Text("**Set:** EX Deoxys")
+                        Text("**Type:** Dragon 🐉")
+                        Text("**HP:** 160")
+                        Text("**Card Number:** 102/107")
                     }
                     .font(.body)
                     .foregroundStyle(.white)
@@ -103,8 +106,8 @@ struct CardDetailsView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .padding(.bottom, 4)
 
-                        Text("Dragon Claw 🐲 – 40 damage")
-                        Text("Bright Flame 🔥🔥 – 120 damage")
+                        Text("Dragon Claw – 40 damage")
+                        Text("Bright Flame – 120 damage")
                     }
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -117,5 +120,6 @@ struct CardDetailsView: View {
 }
 
 #Preview {
-    CardDetailsView()
+    CardDetailsView(card: Card(name: "Sample Card", marketprice: 123.45, imageName: "SampleImage"))
 }
+
