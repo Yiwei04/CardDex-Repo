@@ -76,10 +76,14 @@ struct CardsView: View {
                 }
                 .padding()
             }
+            .onAppear {
+                loadCards()
+            }
         }
         .padding()
         .background(Color(red: 79/255, green: 23/255, blue: 108/255).edgesIgnoringSafeArea(.all))
         .navigationBarBackButtonHidden(true)
+        
     }
 
     private func loadCards() {
