@@ -85,16 +85,56 @@ struct CardDetailsView: View {
                     }
 
                     // Card attributes
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Set: \(card.set ?? "Unknown")").bold()
-                        Text("Type: \(card.type ?? "Unknown")").bold()
-                        Text("HP: \(card.hp ?? 0)").bold()
-                        Text("Card Number: \(card.number ?? "Unknown")").bold()
+                    HStack{
+                        Spacer()
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Set: \(card.set ?? "Unknown")")
+                                .bold()
+                                .foregroundStyle(.blue)
+                                .multilineTextAlignment(.center)
+                                .padding(5)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(.yellow)
+                                )
+                                .frame(maxWidth: .infinity)
+                            Text("Type: \(card.type ?? "Unknown")")
+                                .bold()
+                                .foregroundStyle(.blue)
+                                .multilineTextAlignment(.center)
+                                .padding(5)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(.yellow)
+                                )
+                                .frame(maxWidth: .infinity)
+                            Text("HP: \(card.hp ?? 0)")
+                                .bold()
+                                .foregroundStyle(.blue)
+                                .multilineTextAlignment(.center)
+                                .padding(5)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(.yellow)
+                                )
+                                .frame(maxWidth: .infinity)
+                            Text("Card Number: \(card.number ?? "Unknown")")
+                                .bold()
+                                .foregroundStyle(.blue)
+                                .multilineTextAlignment(.center)
+                                .padding(5)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(.yellow)
+                                )
+                                .frame(maxWidth: .infinity)
+                        }
+                        .font(.body)
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 10)
+                        Spacer()
                     }
-                    .font(.body)
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 10)
 
 
                     // Smaller gap before battle stats

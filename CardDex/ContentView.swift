@@ -35,7 +35,7 @@ struct ContentView: View {
                     
                     // "Begin" button that navigates to the PolicyView
                     NavigationLink(destination: PolicyView()) {
-                        Text("Begin")
+                        Text("Enter")
                             .font(.headline)
                             .foregroundStyle(.purple)
                             .frame(width: 200, height: 50)

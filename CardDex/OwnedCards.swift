@@ -34,6 +34,14 @@ class OwnedCards: ObservableObject {
         }
         return total
     }
+    
+    public func totalValueBase() -> Double {
+        var total: Double = 0
+        for card in cardList {
+            total += card.marketprice
+        }
+        return total
+    }
 
     // Retrieves a card by its name, or returns a fallback card if not found
     public func getCard(name: String) -> Card {
@@ -89,7 +97,7 @@ class OwnedCards: ObservableObject {
     
     // Calculates and returns the total gain percentage based on value change and total value
     public func totalGainPercentage() -> Double {
-        return (totalGain() / totalValue()) * 100
+        return (totalGain() / totalValueBase()) * 100
     }
     
     // Returns a boolean indicating whether the total gain is positive (value change > 0)
