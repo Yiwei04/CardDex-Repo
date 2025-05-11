@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 struct ContentView: View {
+    @State var ownedCards: OwnedCards = OwnedCards()
     private let player = AVPlayer(url: Bundle.main.url(forResource: "mainbackground", withExtension: "mp4")!)
     
     var body: some View {
@@ -39,6 +40,9 @@ struct ContentView: View {
                 }
                 .padding()
             }
+        }
+        .onAppear(){
+            ownedCards.shufflevalues()
         }
         .navigationBarBackButtonHidden(true)
     }

@@ -28,8 +28,8 @@ class Card: Codable, Identifiable, ObservableObject {
         self.type = type
         self.hp = Int(hp)
         self.number = number
-        self.valuechange = 0.00
-        self.valueincrease = true
+        self.valuechange = Double(String(format: "%.3f", Double.random(in: -0.15...0.15)))!
+        self.valueincrease = self.valuechange >= 0
         self.rarity = "Ultra Rare"
     }
 }
