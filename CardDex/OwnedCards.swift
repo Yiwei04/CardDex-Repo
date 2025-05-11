@@ -9,12 +9,19 @@ import Foundation
 
 class OwnedCards: ObservableObject {
     @Published var cardList: [Card] = []
+    private let saveURL: URL
+    
+    init() {
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        self.saveURL = documents.appendingPathComponent("OwnedCards.json")
+        loadCards()
+    }
 
-    func getOwnedCards() -> [Card] {
+    public func getOwnedCards() -> [Card] {
         return cardList
     }
 
-    func getCard(name: String) -> Card {
+    public func getCard(name: String) -> Card {
         for card in cardList {
             if card.name == name {
                 return card
@@ -24,11 +31,31 @@ class OwnedCards: ObservableObject {
         return Card(name: "None", marketprice: 0.0, imageName: "")
     }
 
-    func addCard(card: Card) {
+    public func addCard(card: Card) {
         cardList.append(card)
+        saveCards()
     }
 
-    func removeCard(removecard: Card) {
+    public func removeCard(removecard: Card) {
         cardList.removeAll { $0.name == removecard.name }
+        saveCards()
+    }
+    
+    private func saveCards() {
+        do {
+            let data = try JSONEncoder().encode(cardList)
+            try data.write(to: saveURL)
+        } catch {
+            print("Failed to save cards: ", error)
+        }
+    }
+    
+    private func loadCards() {
+        do {
+            let data = try Data(contentsOf: saveURL)
+            cardList = try JSONDecoder().decode([Card].self, from: data)
+        } catch {
+            print("Failed to load cards: ", error)
+        }
     }
 }

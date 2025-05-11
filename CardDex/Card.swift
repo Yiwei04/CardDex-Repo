@@ -7,15 +7,25 @@
 
 import Foundation
 
-class Card: Identifiable, ObservableObject {
-    let id = UUID()  // Required for SwiftUI lists
+class Card: Codable, Identifiable, ObservableObject {
+    var id = UUID()  // Required for SwiftUI lists
     var name: String
     var marketprice: Double
     var imageName: String
+    var set: String?
+    var type: String?
+    var rarity: String
+    var hp: Int?
+    var number: String?
+    var valuechange: Double
+    var valueincrease: Bool
 
     init(name: String, marketprice: Double, imageName: String) {
         self.name = name
         self.marketprice = marketprice
         self.imageName = imageName
+        self.valuechange = 0.00
+        self.valueincrease = true
+        self.rarity = "Ultra Rare"
     }
 }
