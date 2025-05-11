@@ -35,22 +35,24 @@ struct PokemonNewsView: View {
 
                 // yellow buttons
                 HStack(spacing: 10) {
-                    Text("All Cards")
-                        .font(.system(size: 14, weight: .semibold))
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 14)
-                        .background(Color.yellow)
-                        .foregroundColor(.blue)
-                        .cornerRadius(20)
-
+                    NavigationLink(destination: CardsView()) {
+                        Text("All Cards")
+                            .font(.system(size: 14, weight: .semibold))
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 14)
+                            .background(Color.yellow)
+                            .foregroundColor(.blue)
+                            .cornerRadius(20)
+                    }
+                    
                     Text("News")
                         .font(.system(size: 14, weight: .semibold))
                         .padding(.vertical, 8)
                         .padding(.horizontal, 14)
-                        .background(Color.yellow)
-                        .foregroundColor(.blue)
+                        .background(Color.yellow.opacity(0.6))
+                        .foregroundColor(.gray)
                         .cornerRadius(20)
-
+                    
                     NavigationLink(destination: PokemonFolioView()) {
                         Text("My Portfolio")
                             .font(.system(size: 14, weight: .semibold))

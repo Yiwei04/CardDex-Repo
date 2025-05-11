@@ -6,9 +6,17 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct CardDetailsView: View {
     let card: Card
+    @State var colour: Color = .black
+    @Environment(\.dismiss) var dismiss
+    @StateObject private var cardsList = CardList()
+    @StateObject private var ownedCardsList = OwnedCards()
+    lazy var cards = cardsList.getCardList()
+    lazy var ownedCards = ownedCardsList.getOwnedCards()
+
 
     var body: some View {
         NavigationStack {
@@ -17,7 +25,9 @@ struct CardDetailsView: View {
 
                     // Back button → goes to CardsView
                     HStack {
-                        NavigationLink(destination: CardsView()) {
+                        Button(action: {
+                            dismiss()
+                        }) {
                             Image(systemName: "arrow.left")
                                 .foregroundColor(.yellow)
                                 .font(.title2)
@@ -28,13 +38,13 @@ struct CardDetailsView: View {
 
                     // Card title and rarity
                     VStack(spacing: 6) {
-                        Text("Salamence ex – EX Deoxys (2005)")
+                        Text(card.name)
                             .font(.system(size: 32, weight: .bold))
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: .infinity)
 
-                        Text("⭐️ Ultra Rare (EX card)")
+                        Text(card.rarity)
                             .font(.subheadline)
                             .foregroundColor(.yellow)
                             .shadow(color: .black.opacity(0.8), radius: 1, x: 1, y: 1)
@@ -43,7 +53,7 @@ struct CardDetailsView: View {
                     }
 
                     // Card image
-                    Image("Salamence")
+                    Image(card.imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 200)
@@ -55,39 +65,32 @@ struct CardDetailsView: View {
                             .foregroundColor(.white)
                             .font(.headline)
 
-                        Text("$2,561.39")
+                        Text("$"+String(card.marketprice))
                             .foregroundColor(.white)
                             .font(.system(size: 52, weight: .bold))
 
                         HStack(spacing: 10) {
-                            Text("$45.32")
-                                .foregroundColor(.green)
-                                .font(.title3)
 
-                            Text("▲ 14.63%")
+                            Text(String(card.valuechange)+"%")
                                 .font(.caption)
                                 .foregroundColor(.white)
                                 .padding(.vertical, 4)
                                 .padding(.horizontal, 8)
-                                .background(Color.green)
                                 .cornerRadius(10)
-
-                            Text("24H")
-                                .font(.caption)
-                                .foregroundColor(.white)
-                                .padding(.vertical, 4)
-                                .padding(.horizontal, 8)
-                                .background(Color.gray)
-                                .cornerRadius(10)
+                                .background(colour)
                         }
                     }
 
                     // Card attributes
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("**Set:** EX Deoxys")
-                        Text("**Type:** Dragon 🐉")
-                        Text("**HP:** 160")
-                        Text("**Card Number:** 102/107")
+                        Text("Set: "+" Unkown")
+                            .bold(true)
+                        Text("Type:"+" Unkown")
+                            .bold(true)
+                        Text("HP:"+" Unkown")
+                            .bold(true)
+                        Text("Card Number:"+" Unkown/Unkown")
+                            .bold(true)
                     }
                     .font(.body)
                     .foregroundStyle(.white)
@@ -98,28 +101,57 @@ struct CardDetailsView: View {
                     Spacer().frame(height: 5)
 
                     // Battle stats heading and moves
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Battle Stats ⚔️")
+//                    VStack(alignment: .leading, spacing: 8) {
+//                        Text("Battle Stats ⚔️")
+//                            .font(.system(size: 24, weight: .bold))
+//                            .foregroundColor(.white)
+//                            .frame(maxWidth: .infinity, alignment: .center)
+//                            .padding(.bottom, 4)
+//
+//                        Text("Dragon Claw – 40 damage")
+//                        Text("Bright Flame – 120 damage")
+//                    }
+//                    .foregroundColor(.white)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+                    Button(action: {
+                        ownedCardsList.addCard(card: card)
+                    }) {
+                        Image(systemName: "plus")
                             .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.bottom, 4)
-
-                        Text("Dragon Claw – 40 damage")
-                        Text("Bright Flame – 120 damage")
+                            .foregroundStyle(.blue)
+                            .frame(width: 50, height: 50)
+                            .background(Circle().fill(Color.yellow))
+                            .shadow(radius: 4)
                     }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    Button(action: {
+                        if let _ = ownedCardsList.cardList.firstIndex(where: { $0.name == card.name }) {
+                            ownedCardsList.removeCard(removecard: card)
+                        }
+                    }) {
+                        Image(systemName: "minus")
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(.red)
+                            .frame(width: 50, height: 50)
+                            .background(Circle().fill(Color.yellow))
+                            .shadow(radius: 4)
+                    }
                 }
                 .padding()
             }
             .background(Color(red: 0.311, green: 0.089, blue: 0.424).ignoresSafeArea())
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear() {
+            if(card.valueincrease){
+                colour = .green
+            } else {
+                colour = .red
+            }
+        }
     }
 }
 
 #Preview {
-    CardDetailsView(card: Card(name: "Sample Card", marketprice: 123.45, imageName: "SampleImage"))
+    CardDetailsView(card: Card(name: "Sample Card", marketprice: 0.00, imageName: "SampleImage"))
 }
 
