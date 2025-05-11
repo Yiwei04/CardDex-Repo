@@ -8,15 +8,16 @@
 import SwiftUI
 import UIKit
 
+// View displaying detailed information about a single Card.
 struct CardDetailsView: View {
-    let card: Card
+    let card: Card //The card whose details are being shown
     @State var colour: Color = .black
-    @Environment(\.dismiss) var dismiss
-    @StateObject private var cardsList = CardList()
-    @StateObject private var ownedCardsList = OwnedCards()
-    lazy var cards = cardsList.getCardList()
-    lazy var ownedCards = ownedCardsList.getOwnedCards()
-    let cardNotion: Bool
+    @Environment(\.dismiss) var dismiss //Dismiss action
+    @StateObject private var cardsList = CardList() //Full list of cards
+    @StateObject private var ownedCardsList = OwnedCards() //User's list of cards
+    lazy var cards = cardsList.getCardList() //Lazy loads list of all cards
+    lazy var ownedCards = ownedCardsList.getOwnedCards() //Lazy loads list of owned cards
+    let cardNotion: Bool // Determines whether to show "+" or "-" action
 
 
     var body: some View {
@@ -27,7 +28,8 @@ struct CardDetailsView: View {
                     // Back button → goes to CardsView
                     HStack {
                         Button(action: {
-                            dismiss()
+                            dismiss() // Trigger dismiss environment action
+
                         }) {
                             Image(systemName: "arrow.left")
                                 .foregroundColor(.yellow)
@@ -53,25 +55,25 @@ struct CardDetailsView: View {
                             .frame(maxWidth: .infinity)
                     }
 
-                    // Card image
+                    // Display Card image
                     Image(card.imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 200)
                         .cornerRadius(10)
 
-                    // Total worth section
+                    // Market price and price change info
                     VStack(spacing: 6) {
                         Text("Market Price")
                             .foregroundColor(.white)
                             .font(.headline)
-
+                        // Display current market value after applying simulated change
                         Text("$"+String(format: "%.3f", card.marketprice + (card.marketprice * card.valuechange)))
                             .foregroundColor(.white)
                             .font(.system(size: 52, weight: .bold))
 
+                        // Show change percentage with background color
                         HStack(spacing: 10) {
-
                             Text(String(card.valuechange)+"%")
                                 .font(.caption)
                                 .foregroundColor(.white)
@@ -98,7 +100,9 @@ struct CardDetailsView: View {
                     // Smaller gap before battle stats
                     Spacer().frame(height: 5)
 
+                    // Show Add or Remove button based on `cardNotion`
                     if(cardNotion){
+                        // "+" button to add card to owned list
                         Button(action: {
                             ownedCardsList.addCard(card: card)
                         }) {
@@ -110,6 +114,7 @@ struct CardDetailsView: View {
                                 .shadow(radius: 4)
                         }
                     } else {
+                        // "-" button to remove card from owned list
                         Button(action: {
                             if let _ = ownedCardsList.cardList.firstIndex(where: { $0.name == card.name }) {
                                 ownedCardsList.removeCard(removecard: card)
@@ -128,7 +133,9 @@ struct CardDetailsView: View {
             }
             .background(Color(red: 0.311, green: 0.089, blue: 0.424).ignoresSafeArea())
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true) // Hide default back button
+        
+        // Determine color for price change indicator on view appearance
         .onAppear() {
             if(card.valueincrease){
                 colour = .green
@@ -139,6 +146,7 @@ struct CardDetailsView: View {
     }
 }
 
+// Preview for SwiftUI canvas
 #Preview {
     CardDetailsView(card: Card(
         name: "Sample Card",

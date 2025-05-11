@@ -7,8 +7,9 @@
 
 import SwiftUI
 
+// View that displays recent Pokémon TCG news articles
 struct PokemonNewsView: View {
-    @Environment(\.dismiss) var dismiss  // lets us go back
+    @Environment(\.dismiss) var dismiss  // dismiss action
 
     // strings for sources
     let newsItems = [
@@ -35,7 +36,7 @@ struct PokemonNewsView: View {
 
     
 
-                // search bar
+                // Search bar UI
                 HStack {
                     Image(systemName: "line.3.horizontal")
                         .foregroundColor(.black)
@@ -49,14 +50,15 @@ struct PokemonNewsView: View {
                 .cornerRadius(15)
                 .padding(.horizontal)
 
-                // list of news
+                // Scrollable list of news articles
                 ScrollView {
                     VStack(spacing: 20) {
                         ForEach(newsItems, id: \.self) { item in
+                            // Each news item navigates to CardsView for now (could link to article in the future)
                             NavigationLink(destination: CardsView()) {
                                 VStack(alignment: .leading, spacing: 10) {
                                     
-                                    // name of source and date
+                                    // Source name and date of the article
                                     HStack {
                                         Text(item["source"] ?? "")
                                         Spacer()
@@ -65,14 +67,14 @@ struct PokemonNewsView: View {
                                     .font(.caption)
                                     .foregroundColor(.white)
 
-                                    //  image
+                                    // Image associated with the news article
                                     Image(item["image"] ?? "")
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(height: 180)
                                         .clipped()
 
-                                    // the headline for the news
+                                    // Headline text for the article
                                     Text(item["headline"] ?? "")
                                         .font(.body)
                                         .foregroundColor(.white)

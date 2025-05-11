@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct CardsView: View {
-    @Environment(\.dismiss) var dismiss
-    @StateObject private var cardList = CardList()
-    @State private var searchText = ""
+    @Environment(\.dismiss) var dismiss //Dismiss action
+    @StateObject private var cardList = CardList() //Full list of cards
+    @State private var searchText = "" //search text for search bar
     private let cardNotion: Bool = true
 
+    // Filters the cards based on search input
     var filteredCards: [Card] {
         if searchText.isEmpty {
             return cardList.getCardList()
@@ -86,6 +87,7 @@ struct CardsView: View {
         
     }
 
+    // Loads a predefined set of popular cards if the card list is empty
     private func loadCards() {
         if cardList.cardList.isEmpty {
             cardList.addCard(card: Card(
