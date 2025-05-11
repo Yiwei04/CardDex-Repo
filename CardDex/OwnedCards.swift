@@ -20,6 +20,14 @@ class OwnedCards: ObservableObject {
     public func getOwnedCards() -> [Card] {
         return cardList
     }
+    
+    public func totalValue() -> Double {
+        var total: Double = 0
+        for card in cardList {
+            total += card.marketprice + (card.marketprice * card.valuechange)
+        }
+        return total
+    }
 
     public func getCard(name: String) -> Card {
         for card in cardList {
@@ -57,5 +65,29 @@ class OwnedCards: ObservableObject {
         } catch {
             print("Failed to load cards: ", error)
         }
+    }
+    
+    public func totalGain() -> Double {
+        var total: Double = 0
+        for card in cardList {
+            total += card.valuechange
+        }
+        return total
+    }
+    
+    public func totalGainPercentage() -> Double {
+        return (totalGain() / totalValue()) * 100
+    }
+    
+    public func valuechange() -> Bool {
+        return totalGainPercentage() > 0
+    }
+    
+    public func shufflevalues() {
+        for card in cardList {
+            card.valuechange = Double(String(format: "%.3f", Double.random(in: -15...15)))!
+            card.valueincrease = card.valuechange >= 0
+        }
+        saveCards()
     }
 }

@@ -11,6 +11,7 @@ struct CardsView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var cardList = CardList()
     @State private var searchText = ""
+    private let cardNotion: Bool = true
 
     var filteredCards: [Card] {
         if searchText.isEmpty {
@@ -59,7 +60,7 @@ struct CardsView: View {
                 // Grid of Cards
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                     ForEach(filteredCards) { card in
-                        NavigationLink(destination: CardDetailsView(card: card)) {
+                        NavigationLink(destination: CardDetailsView(card: card, cardNotion: cardNotion)) {
                             VStack {
                                 Image(card.imageName)
                                     .resizable()
@@ -75,9 +76,6 @@ struct CardsView: View {
                 }
                 .padding()
             }
-        }
-        .onAppear {
-            loadCards()
         }
         .padding()
         .background(Color(red: 79/255, green: 23/255, blue: 108/255).edgesIgnoringSafeArea(.all))

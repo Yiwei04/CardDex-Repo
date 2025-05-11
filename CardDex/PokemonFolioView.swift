@@ -9,8 +9,9 @@ import SwiftUI
 
 struct PokemonFolioView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject private var ownedCards = OwnedCards()
+    @State private var ownedCards = OwnedCards()
     @State private var searchText = ""
+    private let cardNotion: Bool = false
 
     var filteredCards: [Card] {
         if searchText.isEmpty {
@@ -33,6 +34,16 @@ struct PokemonFolioView: View {
                             .font(.title2)
                     }
                     Spacer()
+                    Button(action: {
+                        ownedCards = OwnedCards()
+                    }) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundStyle(.blue)
+                            .frame(width: 50, height: 50)
+                            .background(Circle().fill(Color.yellow))
+                            .shadow(radius: 4)
+                    }
                 }
                 .padding()
 
@@ -59,7 +70,7 @@ struct PokemonFolioView: View {
                 // Grid of Cards
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                     ForEach(filteredCards) { card in
-                        NavigationLink(destination: CardDetailsView(card: card)) {
+                        NavigationLink(destination: CardDetailsView(card: card, cardNotion: cardNotion)) {
                             VStack {
                                 Image(card.imageName)
                                     .resizable()

@@ -9,6 +9,7 @@ import Foundation
 
 class CardList: ObservableObject {
     @Published var cardList: [Card] = []
+    @Published var dailyCard: Card?
 
     public func getCardList() -> [Card] {
         return cardList
@@ -24,6 +25,10 @@ class CardList: ObservableObject {
 
     public func removeCard(removecard: Card) {
         cardList.removeAll { $0.name == removecard.name }
+    }
+    
+    public func getDailyCard() -> Card?{
+        return dailyCard
     }
 }
 
