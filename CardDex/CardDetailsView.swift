@@ -83,19 +83,16 @@ struct CardDetailsView: View {
 
                     // Card attributes
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Set: "+" Unkown")
-                            .bold(true)
-                        Text("Type:"+" Unkown")
-                            .bold(true)
-                        Text("HP:"+" Unkown")
-                            .bold(true)
-                        Text("Card Number:"+" Unkown/Unkown")
-                            .bold(true)
+                        Text("Set: \(card.set ?? "Unknown")").bold()
+                        Text("Type: \(card.type ?? "Unknown")").bold()
+                        Text("HP: \(card.hp ?? 0)").bold()
+                        Text("Card Number: \(card.number ?? "Unknown")").bold()
                     }
                     .font(.body)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 10)
+
 
                     // Smaller gap before battle stats
                     Spacer().frame(height: 5)
@@ -152,6 +149,14 @@ struct CardDetailsView: View {
 }
 
 #Preview {
-    CardDetailsView(card: Card(name: "Sample Card", marketprice: 0.00, imageName: "SampleImage"))
+    CardDetailsView(card: Card(
+        name: "Sample Card",
+        marketprice: 0.00,
+        imageName: "SampleImage",
+        set: "N/A",
+        type: "N/A",
+        hp: "N/A",
+        number: "N/A"
+    ))
 }
 

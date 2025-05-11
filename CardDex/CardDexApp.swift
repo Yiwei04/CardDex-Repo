@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct CardDexApp: App {
+    @StateObject var ownedCards = OwnedCards()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                PokemonHomeView()
+            }
+            .environmentObject(ownedCards)
         }
     }
 }

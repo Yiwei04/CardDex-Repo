@@ -28,7 +28,7 @@ class OwnedCards: ObservableObject {
             }
         }
         // Provide a fallback Card with imageName to match new init
-        return Card(name: "None", marketprice: 0.0, imageName: "")
+        return Card(name: "None", marketprice: 0.0, imageName: "", set: "", type: "", hp: "", number: "")
     }
 
     public func addCard(card: Card) {

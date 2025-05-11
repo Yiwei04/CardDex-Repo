@@ -20,10 +20,14 @@ class Card: Codable, Identifiable, ObservableObject {
     var valuechange: Double
     var valueincrease: Bool
 
-    init(name: String, marketprice: Double, imageName: String) {
+    init(name: String, marketprice: Double, imageName: String, set: String, type: String, hp: String, number: String) {
         self.name = name
         self.marketprice = marketprice
         self.imageName = imageName
+        self.set = set
+        self.type = type
+        self.hp = Int(hp)
+        self.number = number
         self.valuechange = 0.00
         self.valueincrease = true
         self.rarity = "Ultra Rare"

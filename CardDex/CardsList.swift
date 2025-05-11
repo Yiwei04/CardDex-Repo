@@ -15,7 +15,7 @@ class CardList: ObservableObject {
     }
 
     public func getCard(name: String) -> Card {
-        cardList.first { $0.name == name } ?? Card(name: "None", marketprice: 0.0, imageName: "")
+        cardList.first { $0.name == name } ?? Card(name: "None", marketprice: 0.0, imageName: "", set: "", type: "", hp: "", number: "")
     }
 
     public func addCard(card: Card) {

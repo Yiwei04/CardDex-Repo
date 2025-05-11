@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct PokemonHomeView: View {
-    @Environment(\.dismiss) var dismiss  // lets us go back
-    
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var ownedCards: OwnedCards
+    @State private var totalWorth: Double = 0.0
+
     var body: some View {
-        ScrollView{
+        ScrollView {
             Image("Pokemon_Logo")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 200, height: 100)
+
             HStack {
                 Button(action: {
                     dismiss()
@@ -28,7 +31,6 @@ struct PokemonHomeView: View {
             }
             .padding(.horizontal)
 
-            // yellow buttons
             HStack(spacing: 10) {
                 NavigationLink(destination: CardsView()) {
                     Text("All Cards")
@@ -60,39 +62,38 @@ struct PokemonHomeView: View {
                         .cornerRadius(20)
                 }
             }
-            // Total Worth
-                VStack(spacing: 8) {
-                    Text("Total Worth")
-                        .font(.headline)
-                        .foregroundColor(.white.opacity(0.8))
-                                        
-                        Text("$2,561.39")
-                            .font(.system(size: 40, weight: .bold))
-                            .foregroundColor(.white)
-                                        
-                        HStack(spacing: 10) {
-                            Text("+$45.32")
-                                .foregroundColor(.green)
-                                .fontWeight(.bold)
-                        Label("14.63%", systemImage: "arrow.up")
-                            .font(.subheadline)
-                            .foregroundColor(.green)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(Color.green.opacity(0.2))
-                            .cornerRadius(8)
-                        Button("24H") { }
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 4)
-                            .background(Color.gray.opacity(0.3))
-                            .cornerRadius(8)
-                        }
-                    }
+
+            VStack(spacing: 8) {
+                Text("Total Worth")
+                    .font(.headline)
+                    .foregroundColor(.white.opacity(0.8))
+
+                Text(String(format: "$%.2f", totalWorth))
+                    .font(.system(size: 40, weight: .bold))
+                    .foregroundColor(.white)
+
+                HStack(spacing: 10) {
+                    Text("+$45.32")
+                        .foregroundColor(.green)
+                        .fontWeight(.bold)
+                    Label("14.63%", systemImage: "arrow.up")
+                        .font(.subheadline)
+                        .foregroundColor(.green)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.green.opacity(0.2))
+                        .cornerRadius(8)
+                    Button("24H") { }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 4)
+                        .background(Color.gray.opacity(0.3))
+                        .cornerRadius(8)
+                }
+            }
             .padding()
-            
-            // Card of the Day
-            VStack{
+
+            VStack {
                 Text("Card of the Day")
                     .font(.title2)
                     .foregroundColor(.white)
@@ -110,9 +111,13 @@ struct PokemonHomeView: View {
         .padding()
         .background(Color(red: 79/255, green: 23/255, blue: 108/255).edgesIgnoringSafeArea(.all))
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            totalWorth = ownedCards.cardList.reduce(0) { $0 + $1.marketprice }
+        }
     }
 }
 
 #Preview {
     PokemonHomeView()
+        .environmentObject(OwnedCards())
 }
