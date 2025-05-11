@@ -12,8 +12,8 @@ struct PokemonNewsView: View {
 
     // strings for sources
     let newsItems = [
-        ["source": "ComicBook", "date": "May 3rd, 2025", "image": "News1", "headline": "The Pokemon TCG Has Officially Revealed its New Unova Card Sets"],
-        ["source": "SportSkeeda", "date": "May 5th, 2025", "image": "News2", "headline": "Pokemon TCG Pocket: Best Oricorio deck guide"]
+        ["source": "ComicBook", "link": "https://comicbook.com/gaming/news/pokemon-tcg-cards-unova-set-black-bolt-white-flare/", "date": "May 3rd, 2025", "image": "News1", "headline": "The Pokemon TCG Has Officially Revealed its New Unova Card Sets"],
+        ["source": "SportSkeeda", "link":"https://www.sportskeeda.com/pokemon/pokemon-tcg-pocket-best-oricorio-deck-guide","date": "May 5th, 2025", "image": "News2", "headline": "Pokemon TCG Pocket: Best Oricorio deck guide"]
     ]
 
     var body: some View {
@@ -53,35 +53,39 @@ struct PokemonNewsView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         ForEach(newsItems, id: \.self) { item in
-                            NavigationLink(destination: CardsView()) {
-                                VStack(alignment: .leading, spacing: 10) {
-                                    
-                                    // name of source and date
-                                    HStack {
-                                        Text(item["source"] ?? "")
-                                        Spacer()
-                                        Text(item["date"] ?? "")
-                                    }
-                                    .font(.caption)
-                                    .foregroundColor(.white)
-
-                                    //  image
-                                    Image(item["image"] ?? "")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(height: 180)
-                                        .clipped()
-
-                                    // the headline for the news
-                                    Text(item["headline"] ?? "")
-                                        .font(.body)
+                            if let url = URL(string: item["link"] ?? "") {
+                                Link(destination: url) {
+                                    VStack(alignment: .leading, spacing: 10) {
+                                        
+                                        // name of source and date
+                                        HStack {
+                                            Text(item["source"] ?? "")
+                                            Spacer()
+                                            Text(item["date"] ?? "")
+                                        }
+                                        .font(.caption)
                                         .foregroundColor(.white)
-                                        .multilineTextAlignment(.leading)
+                                        
+                                        //  image
+                                        Image(item["image"] ?? "")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(height: 180)
+                                            .clipped()
+                                        
+                                        // the headline for the news
+                                        Text(item["headline"] ?? "")
+                                            .font(.body)
+                                            .foregroundColor(.white)
+                                            .multilineTextAlignment(.leading)
+                                    }
+                                    .padding()
+                                    .background(Color.black)
+                                    .cornerRadius(15)
+                                    .padding(.horizontal)
                                 }
-                                .padding()
-                                .background(Color.black)
-                                .cornerRadius(15)
-                                .padding(.horizontal)
+                            } else {
+                                Text("Invalid URL")
                             }
                         }
                     }

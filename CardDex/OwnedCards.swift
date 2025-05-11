@@ -28,6 +28,14 @@ class OwnedCards: ObservableObject {
         }
         return total
     }
+    
+    public func totalValueBase() -> Double {
+        var total: Double = 0
+        for card in cardList {
+            total += card.marketprice
+        }
+        return total
+    }
 
     public func getCard(name: String) -> Card {
         for card in cardList {
@@ -76,7 +84,7 @@ class OwnedCards: ObservableObject {
     }
     
     public func totalGainPercentage() -> Double {
-        return (totalGain() / totalValue()) * 100
+        return (totalGain() / totalValueBase()) * 100
     }
     
     public func valuechange() -> Bool {
