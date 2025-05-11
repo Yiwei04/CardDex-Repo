@@ -11,7 +11,6 @@ struct CardDetailsView: View {
     let card: Card
 
     var body: some View {
-        CardDetailsView
         NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
