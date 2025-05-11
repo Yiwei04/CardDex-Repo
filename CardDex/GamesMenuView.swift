@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// View that displays a menu of game options
 struct GamesMenuView: View {
     var body: some View {
         NavigationStack{
@@ -15,6 +16,7 @@ struct GamesMenuView: View {
                 VStack{
                     Spacer()
                     NavigationLink(destination: PokemonHomeView()) {
+                        // Loads the Pokemon logo image
                         Image("Pokemon_Logo")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -28,6 +30,7 @@ struct GamesMenuView: View {
                             )
                     }
                     Spacer()
+                    // Disabled Magic game logo with a similar background and shadow styling
                     NavigationLink(destination: EmptyView()) {
                         Image("Magic_Logo")
                             .resizable()
@@ -43,6 +46,8 @@ struct GamesMenuView: View {
                     }
                     .disabled(true)
                     Spacer()
+                    
+                    // Disabled One Piece game logo with similar background and shadow
                     NavigationLink(destination: EmptyView()) {
                         Image("One_Piece_Logo")
                             .resizable()
@@ -58,6 +63,8 @@ struct GamesMenuView: View {
                     }
                     .disabled(true)
                     Spacer()
+                    
+                    // Disabled Yu-Gi-Oh game logo with similar background and shadow
                     NavigationLink(destination: EmptyView()) {
                         Image("Yu-Gi-Oh_Logo")
                             .resizable()
@@ -73,6 +80,8 @@ struct GamesMenuView: View {
                     }
                     .disabled(true)
                     Spacer()
+                    
+                    // Disabled Digimon game logo with similar background and shadow
                     NavigationLink(destination: EmptyView()) {
                         Image("Digimon_Logo")
                             .resizable()
@@ -92,6 +101,7 @@ struct GamesMenuView: View {
                 .padding()
             }
         }
+        // Hides the back button in the navigation bar for cleaner UI
         .navigationBarBackButtonHidden(true)
     }
 }

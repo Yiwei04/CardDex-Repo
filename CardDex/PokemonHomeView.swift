@@ -7,19 +7,22 @@
 
 import SwiftUI
 
+// The home screen of the Pokemon card tracking app
 struct PokemonHomeView: View {
-    @Environment(\.dismiss) var dismiss
-    @State var ownedCards: OwnedCards = OwnedCards()
-    @State private var totalWorth: Double = 0.0
-    @State var colour: Color = .black
+    @Environment(\.dismiss) var dismiss //dismiss action
+    @State var ownedCards: OwnedCards = OwnedCards() // Holds user's owned cards
+    @State private var totalWorth: Double = 0.0 // Total monetary worth of owned cards
+    @State var colour: Color = .black // Color used for gain percentage (changes based on value trend)
 
     var body: some View {
         ScrollView {
+            // App logo at the top
             Image("Pokemon_Logo")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 200, height: 100)
 
+            // Back button
             HStack {
                 Button(action: {
                     dismiss()
@@ -32,7 +35,9 @@ struct PokemonHomeView: View {
             }
             .padding(.horizontal)
 
+            // Navigation buttons for various views + refresh
             HStack(spacing: 10) {
+                // Go to All Cards view
                 NavigationLink(destination: CardsView()) {
                     Text("All Cards")
                         .font(.system(size: 14, weight: .semibold))
@@ -43,6 +48,7 @@ struct PokemonHomeView: View {
                         .cornerRadius(20)
                 }
                 
+                // Go to News view
                 NavigationLink(destination: PokemonNewsView()) {
                     Text("News")
                         .font(.system(size: 14, weight: .semibold))
@@ -53,6 +59,7 @@ struct PokemonHomeView: View {
                         .cornerRadius(20)
                 }
                 
+                // Go to My Portfolio view
                 NavigationLink(destination: PokemonFolioView()) {
                     Text("My Portfolio")
                         .font(.system(size: 14, weight: .semibold))
@@ -62,6 +69,8 @@ struct PokemonHomeView: View {
                         .foregroundColor(.blue)
                         .cornerRadius(20)
                 }
+                
+                // Refresh button to reload card data and update total worth
                 Button(action: {
                     refresh()
                 }) {
@@ -74,6 +83,7 @@ struct PokemonHomeView: View {
                 }
             }
 
+            // Summary of total card value and gain stats
             VStack(spacing: 8) {
                 Text("Total Worth")
                     .font(.headline)
@@ -98,6 +108,7 @@ struct PokemonHomeView: View {
             }
             .padding()
 
+            // Highlight feature: Card of the Day
             VStack {
                 Text("Card of the Day")
                     .font(.title2)
@@ -106,6 +117,7 @@ struct PokemonHomeView: View {
                 Text("")
                     .font(.subheadline)
                     .foregroundColor(.green)
+                // Featured card image (hardcoded as Pikachu)
                 Image("Pikachu")
                     .resizable()
                     .cornerRadius(12)
@@ -116,6 +128,8 @@ struct PokemonHomeView: View {
         .padding()
         .background(Color(red: 79/255, green: 23/255, blue: 108/255).edgesIgnoringSafeArea(.all))
         .navigationBarBackButtonHidden(true)
+        
+        // When the view appears, calculate total worth and set gain color
         .onAppear {
             totalWorth = ownedCards.totalValue()
             if(ownedCards.valuechange()){
@@ -125,6 +139,7 @@ struct PokemonHomeView: View {
             }
         }
     }
+    // Refresh function to reload data and recalculate worth
     public func refresh() {
         ownedCards = OwnedCards()
         totalWorth = ownedCards.totalValue()
@@ -133,5 +148,5 @@ struct PokemonHomeView: View {
 
 #Preview {
     PokemonHomeView()
-        .environmentObject(OwnedCards())
+        .environmentObject(OwnedCards()) // Provide a preview environment object
 }

@@ -7,8 +7,9 @@
 
 import SwiftUI
 
+// View that displays recent Pokémon TCG news articles
 struct PokemonNewsView: View {
-    @Environment(\.dismiss) var dismiss  // lets us go back
+    @Environment(\.dismiss) var dismiss  // dismiss action
 
     // strings for sources
     let newsItems = [
@@ -35,7 +36,7 @@ struct PokemonNewsView: View {
 
     
 
-                // search bar
+                // Search bar UI
                 HStack {
                     Image(systemName: "line.3.horizontal")
                         .foregroundColor(.black)
@@ -49,15 +50,16 @@ struct PokemonNewsView: View {
                 .cornerRadius(15)
                 .padding(.horizontal)
 
-                // list of news
+                // Scrollable list of news articles
                 ScrollView {
                     VStack(spacing: 20) {
                         ForEach(newsItems, id: \.self) { item in
                             if let url = URL(string: item["link"] ?? "") {
+                              //Links to the external article (Doesn't always work)
                                 Link(destination: url) {
                                     VStack(alignment: .leading, spacing: 10) {
                                         
-                                        // name of source and date
+                                        // Source name and date of the article
                                         HStack {
                                             Text(item["source"] ?? "")
                                             Spacer()
