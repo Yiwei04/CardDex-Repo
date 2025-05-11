@@ -9,8 +9,9 @@ import SwiftUI
 
 struct PokemonHomeView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var ownedCards: OwnedCards
+    @State var ownedCards: OwnedCards = OwnedCards()
     @State private var totalWorth: Double = 0.0
+    @State var colour: Color = .black
 
     var body: some View {
         ScrollView {
@@ -61,6 +62,16 @@ struct PokemonHomeView: View {
                         .foregroundColor(.blue)
                         .cornerRadius(20)
                 }
+                Button(action: {
+                    refresh()
+                }) {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundStyle(.blue)
+                        .frame(width: 50, height: 50)
+                        .background(Circle().fill(Color.yellow))
+                        .shadow(radius: 4)
+                }
             }
 
             VStack(spacing: 8) {
@@ -73,21 +84,15 @@ struct PokemonHomeView: View {
                     .foregroundColor(.white)
 
                 HStack(spacing: 10) {
-                    Text("+$45.32")
+                    Text("$"+String(ownedCards.totalGain()))
                         .foregroundColor(.green)
                         .fontWeight(.bold)
-                    Label("14.63%", systemImage: "arrow.up")
+                    Text(String(format: "%.3f", ownedCards.totalGainPercentage())+"%")
                         .font(.subheadline)
-                        .foregroundColor(.green)
+                        .foregroundColor(colour)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(Color.green.opacity(0.2))
-                        .cornerRadius(8)
-                    Button("24H") { }
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 4)
-                        .background(Color.gray.opacity(0.3))
                         .cornerRadius(8)
                 }
             }
@@ -98,7 +103,7 @@ struct PokemonHomeView: View {
                     .font(.title2)
                     .foregroundColor(.white)
                     .bold()
-                Text("Card Value + 3.5%")
+                Text("")
                     .font(.subheadline)
                     .foregroundColor(.green)
                 Image("Pikachu")
@@ -112,8 +117,17 @@ struct PokemonHomeView: View {
         .background(Color(red: 79/255, green: 23/255, blue: 108/255).edgesIgnoringSafeArea(.all))
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            totalWorth = ownedCards.cardList.reduce(0) { $0 + $1.marketprice }
+            totalWorth = ownedCards.totalValue()
+            if(ownedCards.valuechange()){
+                colour = .green
+            } else {
+                colour = .red
+            }
         }
+    }
+    public func refresh() {
+        ownedCards = OwnedCards()
+        totalWorth = ownedCards.totalValue()
     }
 }
 

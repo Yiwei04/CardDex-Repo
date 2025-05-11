@@ -16,6 +16,7 @@ struct CardDetailsView: View {
     @StateObject private var ownedCardsList = OwnedCards()
     lazy var cards = cardsList.getCardList()
     lazy var ownedCards = ownedCardsList.getOwnedCards()
+    let cardNotion: Bool
 
 
     var body: some View {
@@ -65,7 +66,7 @@ struct CardDetailsView: View {
                             .foregroundColor(.white)
                             .font(.headline)
 
-                        Text("$"+String(card.marketprice))
+                        Text("$"+String(format: "%.3f", card.marketprice + (card.marketprice * card.valuechange)))
                             .foregroundColor(.white)
                             .font(.system(size: 52, weight: .bold))
 
@@ -97,40 +98,30 @@ struct CardDetailsView: View {
                     // Smaller gap before battle stats
                     Spacer().frame(height: 5)
 
-                    // Battle stats heading and moves
-//                    VStack(alignment: .leading, spacing: 8) {
-//                        Text("Battle Stats ⚔️")
-//                            .font(.system(size: 24, weight: .bold))
-//                            .foregroundColor(.white)
-//                            .frame(maxWidth: .infinity, alignment: .center)
-//                            .padding(.bottom, 4)
-//
-//                        Text("Dragon Claw – 40 damage")
-//                        Text("Bright Flame – 120 damage")
-//                    }
-//                    .foregroundColor(.white)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-                    Button(action: {
-                        ownedCardsList.addCard(card: card)
-                    }) {
-                        Image(systemName: "plus")
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundStyle(.blue)
-                            .frame(width: 50, height: 50)
-                            .background(Circle().fill(Color.yellow))
-                            .shadow(radius: 4)
-                    }
-                    Button(action: {
-                        if let _ = ownedCardsList.cardList.firstIndex(where: { $0.name == card.name }) {
-                            ownedCardsList.removeCard(removecard: card)
+                    if(cardNotion){
+                        Button(action: {
+                            ownedCardsList.addCard(card: card)
+                        }) {
+                            Image(systemName: "plus")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundStyle(.blue)
+                                .frame(width: 50, height: 50)
+                                .background(Circle().fill(Color.yellow))
+                                .shadow(radius: 4)
                         }
-                    }) {
-                        Image(systemName: "minus")
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(.red)
-                            .frame(width: 50, height: 50)
-                            .background(Circle().fill(Color.yellow))
-                            .shadow(radius: 4)
+                    } else {
+                        Button(action: {
+                            if let _ = ownedCardsList.cardList.firstIndex(where: { $0.name == card.name }) {
+                                ownedCardsList.removeCard(removecard: card)
+                            }
+                        }) {
+                            Image(systemName: "minus")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(.red)
+                                .frame(width: 50, height: 50)
+                                .background(Circle().fill(Color.yellow))
+                                .shadow(radius: 4)
+                        }
                     }
                 }
                 .padding()
@@ -157,6 +148,6 @@ struct CardDetailsView: View {
         type: "N/A",
         hp: "N/A",
         number: "N/A"
-    ))
+    ), cardNotion: true)
 }
 
