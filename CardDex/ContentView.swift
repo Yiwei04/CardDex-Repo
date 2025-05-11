@@ -25,7 +25,7 @@ struct ContentView: View {
                         .frame(width: 350, height: 350)
                     Spacer()
                     NavigationLink(destination: PolicyView()) {
-                        Text("Begin")
+                        Text("Enter")
                             .font(.headline)
                             .foregroundStyle(.purple)
                             .frame(width: 200, height: 50)
