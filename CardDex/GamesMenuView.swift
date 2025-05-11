@@ -35,7 +35,7 @@ struct GamesMenuView: View {
                             .frame(width: 180, height: 100)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(.white)
+                                    .fill(.gray)
                                     .opacity(0.9)
                                     .shadow(color: .gray.opacity(1), radius: 5, x: 0, y: 2)
                                     .frame(width: 300, height: 120)
@@ -50,7 +50,7 @@ struct GamesMenuView: View {
                             .frame(width: 180, height: 100)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(.white)
+                                    .fill(.gray)
                                     .opacity(0.9)
                                     .shadow(color: .gray.opacity(1), radius: 5, x: 0, y: 2)
                                     .frame(width: 300, height: 120)
@@ -65,7 +65,7 @@ struct GamesMenuView: View {
                             .frame(width: 180, height: 100)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(.white)
+                                    .fill(.gray)
                                     .opacity(0.9)
                                     .shadow(color: .gray.opacity(1), radius: 5, x: 0, y: 2)
                                     .frame(width: 300, height: 120)
@@ -80,7 +80,7 @@ struct GamesMenuView: View {
                             .frame(width: 180, height: 100)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(.white)
+                                    .fill(.gray)
                                     .opacity(0.9)
                                     .shadow(color: .gray.opacity(1), radius: 5, x: 0, y: 2)
                                     .frame(width: 300, height: 120)

@@ -115,6 +115,7 @@ struct CardDetailsView: View {
             }
             .background(Color(red: 0.311, green: 0.089, blue: 0.424).ignoresSafeArea())
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

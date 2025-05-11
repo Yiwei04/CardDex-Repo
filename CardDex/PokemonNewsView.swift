@@ -118,6 +118,7 @@ struct PokemonNewsView: View {
             .padding(.top)
             .background(Color(red: 79/255, green: 23/255, blue: 108/255).ignoresSafeArea())
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
