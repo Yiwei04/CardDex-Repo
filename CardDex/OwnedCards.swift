@@ -108,7 +108,7 @@ class OwnedCards: ObservableObject {
     // Randomly shuffles the value change of each card within a specified range and saves the updated values
     public func shufflevalues() {
         for card in cardList {
-            card.valuechange = Double(String(format: "%.3f", Double.random(in: -15...15)))!
+            card.valuechange = Double(String(format: "%.3f", Double.random(in: -0.15...0.15)))!
             card.valueincrease = card.valuechange >= 0
         }
         saveCards()
