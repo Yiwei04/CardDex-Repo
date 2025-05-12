@@ -94,7 +94,7 @@ struct PokemonHomeView: View {
                     .foregroundColor(.white)
 
                 HStack(spacing: 10) {
-                    Text("$"+String(format: "$%.2f", ownedCards.totalGain()))
+                    Text(String(format: "$%.2f", ownedCards.totalGain()))
                         .foregroundColor(colour)
                         .fontWeight(.bold)
                     Text(String(format: "%.3f", ownedCards.totalGainPercentage())+"%")
